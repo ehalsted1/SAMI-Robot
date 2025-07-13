@@ -2,6 +2,7 @@ import os
 import threading
 import random
 import time
+from audio_group import AudioGroup
 
 try:
     from playsound import playsound
@@ -16,6 +17,8 @@ class AudioManager:
         self.build_audio_path_end()
         self.rng = random.Random()
         self._last_audio_clip = None
+        self.audio_groups = []
+
 
     def build_audio_path_end(self):
         # Builds the suffix for audio file names, e.g. "_DefaultVoice.wav"
@@ -66,10 +69,14 @@ class AudioManager:
         except Exception as e:
             print(f"Error playing audio '{full_path}': {e}")
 
-    def repeat_audio(self):
+    def repeat_audio(self, async_=False):
         if self._last_audio_clip:
             print(f"Repeating audio: {self._last_audio_clip}")
-            self._play_audio(self._last_audio_clip)
+            if async_:
+                thread = threading.Thread(target=self._play_audio, args=(self._last_audio_clip,))
+                thread.start()
+            else:
+                self._play_audio(self._last_audio_clip)
         else:
             print("No audio to repeat.")
 
@@ -86,6 +93,33 @@ class AudioManager:
             print(f"Skipping audio '{clip_name}' due to probability check.")
             return False
 
+    def send_audio_group(self, group_name, async_=True, isvoice=True, encoding="", probability=1.0):
+        # first check if we already have an audio group that matches
+        current_group = next((clip_group for clip_group in self.audio_groups if clip_group.group_name == group_name and clip_group._voice_type == self._voice_type), None)
+        if current_group is None:
+            # if we don't, let's make one!
+            current_group = AudioGroup(group_name,self._audio_folder_path,isvoice,self._voice_type,self._audio_file_encoding)
+            if current_group == False:
+                # if we failed to make a group, return false
+                return False
+            # if we made a new group, let's add it to the list of groups!
+            self.audio_groups.append(current_group)
+        # then let's get a clip from the group, with a probability
+        new_clip = current_group.get_clip(probability)
+        if new_clip == "":
+            # if we got an empty string, then we return false
+            print(f"Skipping audio '{new_clip}' due to probability check.")
+            return False
+        else:
+            # otherwise, we'll play it syncronously or asyncronously depending on preferences
+            self._last_audio_clip = new_clip
+            if async_:
+                thread = threading.Thread(target=self._play_audio, args=(new_clip,))
+                thread.start()
+            else:
+                self._play_audio(new_clip)
+            return True
+
     def process_audio_call(self, audio_clip):
         """
         Parses and appropriately plays an audio file based on instructions from a keyframe
@@ -98,35 +132,36 @@ class AudioManager:
         async_ = audio_clip.get("Async","False") == "True"
         probability = audio_clip.get("Probability",1)
         isvoice = audio_clip.get("IsVoice","True") == "True"
-        encoding = audio_clip.get("Encoding","")
+        encoding = audio_clip.get("Encoding",self._audio_file_encoding)
 
         if audio_clip.get("IsGroup","False") == "True":
             # then handle it like a group of audio options rather than a standalone clip
-            group_dir = os.path.join(self._audio_folder_path, clip_name)
-            if not os.path.isdir(group_dir):
-                print(f"Audio group directory '{group_dir}' not found.")
-                return False
-            
-            group_clips = [
-            f for f in os.listdir(group_dir)
-            if f.endswith(self._audio_file_encoding) and f"_{self._voice_type}" in f
-        ]
-            if not group_clips:
-                print(f"No matching audio clips found in group '{clip_name}'.")
-                return False
-            selected_clip = self.rng.choice(group_clips)
-            full_path = os.path.join(group_dir, selected_clip)
-            self._last_audio_clip = full_path
-            print(f"Playing audio group clip: {full_path}")
-
-            if async_:
-                thread = threading.Thread(target=self._play_audio, args=(full_path,))
-                thread.start()
-            else:
-                self._play_audio(full_path)
-
-            return True
-            
+            return send_audio_group(clip_name, async_, isvoice, encoding, probability)
+            # # first check if we already have an audio group that matches
+            # current_group = next((clip_group for clip_group in self.audio_groups if clip_group.group_name == clip_name and clip_group._voice_type == self._voice_type), None)
+            # if current_group is None:
+            #     # if we don't, let's make one!
+            #     current_group = AudioGroup(clip_name,isvoice,self._voice_type,self._audio_folder_path,self._audio_file_encoding)
+            #     if current_group == False:
+            #         # if we failed to make a group, return false
+            #         return False
+            #     # if we made a new group, let's add it to the list of groups!
+            #     self.audio_groups.append(current_group)
+            # # then let's get a clip from the group, with a probability
+            # new_clip = current_group.get_clip(probability)
+            # if new_clip == "":
+            #     # if we got an empty string, then we return false
+            #     print(f"Skipping audio '{new_clip}' due to probability check.")
+            #     return False
+            # else:
+            #     # otherwise, we'll play it syncronously or asyncronously depending on preferences
+            #     self._last_audio_clip = new_clip
+            #     if async_:
+            #         thread = threading.Thread(target=self._play_audio, args=(new_clip,))
+            #         thread.start()
+            #     else:
+            #         self._play_audio(new_clip)
+            #     return True         
         else:
             # If the clip isn't part of a group, then send it as a standalone audio clip with a probability
             return self.send_audio_with_probability(clip_name, probability, async_, isvoice, encoding)
