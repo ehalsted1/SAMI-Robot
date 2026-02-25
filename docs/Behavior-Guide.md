@@ -33,23 +33,23 @@ The different pre-built eye expressions are called Emotes. Within each keyframe,
 
 | Appearance                        | Emote       | ID |
 | --------------------------------- | ----------- | -- |
-| <img src="res/.png" width="30%"/> | Off         | 0  |
-| <img src="res/.png" width="30%"/> | Neutral     | 1  |
-| <img src="res/.png" width="30%"/> | Happy       | 2  |
-| <img src="res/.png" width="30%"/> | Sad         | 3  |
-| <img src="res/.png" width="30%"/> | Angry       | 4  |
-| <img src="res/.png" width="30%"/> | Confused    | 5  |
-| <img src="res/.png" width="30%"/> | Closed      | 6  |
-| <img src="res/.png" width="30%"/> | Sleepy      | 7  |
-| <img src="res/.png" width="30%"/> | Dead        | 8  |
-| <img src="res/.png" width="30%"/> | slightRight | 9  |
-| <img src="res/.png" width="30%"/> | Right       | 10 |
-| <img src="res/.png" width="30%"/> | slightLeft  | 11 |
-| <img src="res/.png" width="30%"/> | Left        | 12 |
-| <img src="res/.png" width="30%"/> | slightUp    | 13 |
-| <img src="res/.png" width="30%"/> | Up          | 14 |
-| <img src="res/.png" width="30%"/> | slightDown  | 15 |
-| <img src="res/.png" width="30%"/> | Down        | 16 |
+| <img src="res/emotes/.png" width="30%"/> | Off         | 0  |
+| <img src="res/emotes/.png" width="30%"/> | Neutral     | 1  |
+| <img src="res/emotes/.png" width="30%"/> | Happy       | 2  |
+| <img src="res/emotes/.png" width="30%"/> | Sad         | 3  |
+| <img src="res/emotes/.png" width="30%"/> | Angry       | 4  |
+| <img src="res/emotes/.png" width="30%"/> | Confused    | 5  |
+| <img src="res/emotes/.png" width="30%"/> | Closed      | 6  |
+| <img src="res/emotes/.png" width="30%"/> | Sleepy      | 7  |
+| <img src="res/emotes/.png" width="30%"/> | Dead        | 8  |
+| <img src="res/emotes/.png" width="30%"/> | slightRight | 9  |
+| <img src="res/emotes/.png" width="30%"/> | Right       | 10 |
+| <img src="res/emotes/.png" width="30%"/> | slightLeft  | 11 |
+| <img src="res/emotes/.png" width="30%"/> | Left        | 12 |
+| <img src="res/emotes/.png" width="30%"/> | slightUp    | 13 |
+| <img src="res/emotes/.png" width="30%"/> | Up          | 14 |
+| <img src="res/emotes/.png" width="30%"/> | slightDown  | 15 |
+| <img src="res/emotes/.png" width="30%"/> | Down        | 16 |
 
 
 
@@ -102,3 +102,55 @@ If IsVoice is set to True, then the audio file matches a particular voice or spe
 
 If IsVoice is set to True, the audio manager will append the string provided on initialization as 'starting_voice' or the string set as 'selected_voice' to the end of the file. This will always be attached *last* after all other naming options are added. For example, if the selected_voice is set to "Matt" and IsVoice is true, the file name will always end as "_Matt.mp3".
 
+
+
+## Starter Behaviors
+We also provide a collection of pre-built behaviors to get you started with the system. The behaviors themselves are provided with the [software files](https://github.com/shareresearchteam/SAMI-Robot/tree/main/software). Some of the behaviors were provided by the students and their projects as part of their Oregon State University robotics course work. The related projects are linked in the notes. Each behavior is also shown below as an easy reference.
+
+| Name         | Behavior                  | Notes         |
+| ------------ | ------------------------- | ------------- |
+| Afraid1      | <img src="res/behaviors/Afraid1.gif"/> |  |
+| Afraid2      | <img src="res/behaviors/Afraid2.gif"/> |  |
+| Afraid3      | <img src="res/behaviors/Afraid3.gif"/> |  |
+| Angry1       | <img src="res/behaviors/Angry1.gif"/> |  |
+| Angry2       | <img src="res/behaviors/Angry2.gif"/> |  |
+| Angry3       | <img src="res/behaviors/Angry3.gif"/> |  |
+| Bored1       | <img src="res/behaviors/Bored1.gif"/> |  |
+| Bored2       | <img src="res/behaviors/Bored2.gif"/> |  |
+| Bored3       | <img src="res/behaviors/Bored3.gif"/> |  |
+| Happy1       | <img src="res/behaviors/Happy1.gif"/> |  |
+| Happy2       | <img src="res/behaviors/Happy2.gif"/> |  |
+| Happy3       | <img src="res/behaviors/Happy3.gif"/> |  |
+| Neutral1     | <img src="res/behaviors/Neutral1.gif"/> |  |
+| Neutral2     | <img src="res/behaviors/Neutral2.gif"/> |  |
+| Neutral3     | <img src="res/behaviors/Neutral3.gif"/> |  |
+| Relaxed1     | <img src="res/behaviors/Relaxed1.gif"/> |  |
+| Relaxed2     | <img src="res/behaviors/Relaxed2.gif"/> |  |
+| Relaxed3     | <img src="res/behaviors/Relaxed3.gif"/> |  |
+| Silly1       | <img src="res/behaviors/Silly1.gif"/> |  |
+| Silly2       | <img src="res/behaviors/Silly2.gif"/> |  |
+| Silly3       | <img src="res/behaviors/Silly3.gif"/> |  |
+| Sleepy1      | <img src="res/behaviors/Sleepy1.gif"/> |  |
+| Sleepy2      | <img src="res/behaviors/Sleepy2.gif"/> |  |
+| Sleepy3      | <img src="res/behaviors/Sleepy3.gif"/> |  |
+| Surprise1    | <img src="res/behaviors/Surprise1.gif"/> |  |
+| Surprise2    | <img src="res/behaviors/Surprise2.gif"/> |  |
+| Surprise3    | <img src="res/behaviors/Surprise3.gif"/> |  |
+| Yes          | <img src="res/behaviors/Yes.gif"/> |  |
+| No           | <img src="res/behaviors/No.gif"/> |  |
+| Wave         | <img src="res/behaviors/Wave.gif"/> |  |
+| Home         | <img src="res/behaviors/Home.gif"/> |  |
+| Quizzical    | <img src="res/behaviors/Quizzical.gif"/> |  |
+| CastSpell    | <img src="res/behaviors/CastSpell.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| Cowering     | <img src="res/behaviors/Cowering.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| GestureFar   | <img src="res/behaviors/GestureFar.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| Give         | <img src="res/behaviors/Give.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| PointForward | <img src="res/behaviors/PointForward.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| PointLeft    | <img src="res/behaviors/PointLeft.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| PointRight   | <img src="res/behaviors/PointRight.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| ShowBig      | <img src="res/behaviors/ShowBig.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| Shrug        | <img src="res/behaviors/Shrug.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| Explaining   | <img src="res/behaviors/Explaining.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| Dead         | <img src="res/behaviors/Dead.gif"/> |  |
+| Listening    | <img src="res/behaviors/Listening.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
+| Thinking     | <img src="res/behaviors/Thinking.gif"/> | From [here](https://github.com/aschn464/CSI_SAMI) |
