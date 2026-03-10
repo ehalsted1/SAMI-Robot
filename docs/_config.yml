@@ -30,6 +30,7 @@ sidebar:
   - label: Testing the Robot
     children:
       - software-setup
+  - sami-sim
   - label: Software Documentation
     children:
       - software-architecture
@@ -39,3 +40,5 @@ sidebar:
     children:
       - angle-ranges
       - hardware-modification
+  - label: Miscellaneous
+  - label: Example Applications
